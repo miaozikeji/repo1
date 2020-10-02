@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.AttentionDao">
+
+
+    <!--    查询关注-->
+    <select id="selectAttentionByphone" resultType="com.example.demo.entity.Attention">
+    select * from cAttention where    f=#{f}
+  </select>
+    <!--    查询粉丝-->
+    <select id="selectAttentionByTo" resultType="com.example.demo.entity.Attention">
+    select * from cAttention where    t=#{t}
+  </select>
+    <!--    查询两个用户之间是否存在关注-->
+    <select id="selectAttention" resultType="com.example.demo.entity.Attention">
+        select * from cAttention where   t=#{t} and f=#{f}
+      </select>
+
+    <!--添加关注-->
+    <insert id="insertAttention" parameterType="com.example.demo.entity.Attention">
+            insert into cAttention (f,t)
+            values (#{f},#{t})
+        </insert>
+
+    <!--        取消关注-->
+    <delete id="deleteAttention">
+        delete from cAttention where
+        <foreach collection="list" item="item" separator=" or " index="index">
+            (t = #{item.t} and f = #{item.f} )
+        </foreach>
+    </delete>
+
+</mapper>
+

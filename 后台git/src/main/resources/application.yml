@@ -1,0 +1,45 @@
+spring:
+  mail:
+    default-encoding: UTF-8
+    host: smtp.qq.com
+    protocol: smtp
+    username: 1516917637@qq.com
+    password: ggmkycjewodsgfej
+    smtp:
+      auth: true
+      starttls:
+        enable: true
+        required: true
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/chongwushequ?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+
+server:
+  port: 8081
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

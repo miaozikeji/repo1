@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.CommentItemDao">
+
+
+    <!--    查询评论的子评论根据评论的id-->
+    <select id="selectCommentItemByCommenId" resultType="com.example.demo.entity.CommentItem">
+    select * from cCommentItem where    commentid=#{commentid} order by id desc
+  </select>
+
+    <!--    添加评论-->
+    <insert id="insertCommentItem" parameterType="com.example.demo.entity.CommentItem">
+            insert into cCommentItem (commentid,userphone,text)
+            values (#{commentid},#{userphone},#{text})
+        </insert>
+    <!--删除评论-->
+    <delete id="delectCommentItemById">
+        delete from cCommentItem where
+        <foreach collection="list" item="item" separator=" or " index="index">
+            (id = #{item.id} )
+        </foreach>
+    </delete>
+
+</mapper>
+

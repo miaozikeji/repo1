@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.DynamicDao">
+
+    <!--    添加动态-->
+    <insert id="insertDynamic" parameterType="com.example.demo.entity.Dynamic">
+        insert into cDynamic (phone,text,type,browse,pettypeid,city,releasetime)
+        values (#{phone},#{text},#{type},#{browse},#{pettypeid},#{city},#{releasetime})
+    </insert>
+
+    <select id="selectDynamic" resultType="com.example.demo.entity.Dynamic">
+    select * from cDynamic order by id desc
+  </select>
+    <!--    根据电话号码查询-->
+    <select id="selectDynamicByiphon" resultType="com.example.demo.entity.Dynamic">
+    select * from cDynamic where    phone=#{phone} order by id desc limit #{limit},4
+  </select>
+    <select id="selectDynamicByuser" resultType="com.example.demo.entity.Dynamic">
+    select * from cDynamic where    phone=#{phone} order by id desc
+  </select>
+
+    <!--    根据分类查询-->
+    <select id="selectDynamicBytype" resultType="com.example.demo.entity.Dynamic">
+    select * from cDynamic where    pettypeid=#{pettypeid} order by id desc
+  </select>
+    <select id="selectDynamicByid" resultType="com.example.demo.entity.Dynamic">
+    select * from cDynamic where    id=#{id} order by id desc
+  </select>
+    <select id="selectDynamicByLocal" resultType="com.example.demo.entity.Dynamic">
+    select * from cDynamic where    city=#{city} order by id desc
+  </select>
+    <update id="insertbrowse">
+        UPDATE cDynamic SET browse=#{browse} where id=#{id}
+    </update>
+        <delete id="delectDynamic">
+            delete from cDynamic where
+            <foreach collection="list" item="item" separator=" or " index="index">
+                (id = #{item.id})
+            </foreach>
+        </delete>
+
+</mapper>
+

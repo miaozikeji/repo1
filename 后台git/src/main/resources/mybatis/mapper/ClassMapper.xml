@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.ClassDao">
+
+
+    <!--    查询关注-->
+    <select id="selectClassById" resultType="com.example.demo.entity.cClass">
+    select * from cclass where    id=#{id}
+  </select>
+    <select id="selectClassitemByEid" resultType="com.example.demo.entity.Classitem">
+    select * from cclassitem where    eid=#{eid}
+  </select>
+    <select id="selectClassByType" resultType="com.example.demo.entity.cClass">
+    select * from cclass where    type=#{type}
+  </select>
+
+    <insert id="insertBarrage" parameterType="com.example.demo.entity.Barrage">
+            insert into cbarrage (eid,text,shijian,size,color)
+            values (#{eid},#{text},#{shijian},#{size},#{color})
+     </insert>
+    <select id="selectBarrage" resultType="com.example.demo.entity.Barrage">
+    select * from cbarrage where    eid=#{eid}
+  </select>
+
+    <select id="searchclass" resultType="com.example.demo.entity.cClass">
+    select * from cclass where  classname like  '%${text}%'
+  </select>
+    <select id="searchclassitem" resultType="com.example.demo.entity.Classitem">
+    select * from cclassitem where  classname like  '%${text}%'
+  </select>
+
+</mapper>
+

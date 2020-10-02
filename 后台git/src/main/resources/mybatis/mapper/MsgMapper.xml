@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.MsgDao">
+
+    <insert id="insertMsg" parameterType="com.example.demo.entity.Msg">
+        insert into cMsg (fromUserId,toUserId,type,contentText,time)
+        values (#{fromUserId},#{toUserId},#{type},#{contentText},#{time})
+    </insert>
+
+    <select id="selectMsgid" resultType="com.example.demo.entity.Msg">
+    select * from cmsg where    fromUserId=#{fromUserId} and toUserId=#{toUserId} and time=#{time}
+  </select>
+    <select id="selectMsgbyid" resultType="com.example.demo.entity.Msg">
+    select * from cmsg where    id=#{id}
+  </select>
+    <select id="selectBytofrom" resultType="com.example.demo.entity.Msg">
+    select * from cmsg where     fromUserId=#{fromUserId} and toUserId=#{toUserId}
+  </select>
+
+
+</mapper>
+

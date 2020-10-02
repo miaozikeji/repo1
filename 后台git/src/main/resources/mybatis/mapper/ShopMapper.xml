@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.ShopDao">
+
+
+    <select id="selectShopById" resultType="com.example.demo.entity.Shop">
+    select * from cshop where    id=#{id}
+  </select>
+    <select id="selectcshopchoiceByEid" resultType="com.example.demo.entity.Shopchoice">
+    select * from cshopchoice where    eid=#{eid}
+  </select>
+    <select id="selectshopchoicebyid" resultType="com.example.demo.entity.Shopchoice">
+    select * from cshopchoice where    id=#{id}
+  </select>
+    <select id="selectcaddressByuser" resultType="com.example.demo.entity.Address">
+    select * from caddress where    user=#{user}
+  </select>
+
+    <update id="updateshopaddress">
+        UPDATE caddress SET address=#{address} , addis=#{addis} , addphone=#{addphone} , addname=#{addname} where id=#{id}
+    </update>
+    <update id="updateshopaddressis">
+        UPDATE caddress SET  addis=0 where user=#{user}
+    </update>
+
+    <insert id="insertcaddress" parameterType="com.example.demo.entity.Address">
+            insert into caddress (address,addis,addphone,addname,user)
+            values (#{address},#{addis},#{addphone},#{addname},#{user})
+        </insert>
+
+    <delete id="deletecaddress">
+        delete from caddress where
+        <foreach collection="list" item="item" separator=" or " index="index">
+            (id = #{item.id})
+        </foreach>
+    </delete>
+
+    <select id="selectshopcartbyuser" resultType="com.example.demo.entity.ShopCart">
+    select * from cshopcart where    user=#{user} order by id desc
+  </select>
+    <insert id="insertcshopcart" parameterType="com.example.demo.entity.ShopCart">
+            insert into cshopcart (eid,user,choice,num)
+            values (#{eid},#{user},#{choice},#{num})
+        </insert>
+    <update id="updateshopcart">
+        UPDATE cshopcart SET  num=#{num} where id=#{id}
+    </update>
+    <select id="selectorderbyuser" resultType="com.example.demo.entity.Order">
+    select * from corder where    user=#{user} order by id desc
+  </select>
+    <insert id="insertcorder" parameterType="com.example.demo.entity.Order">
+            insert into corder (state,address,user,pay,paynum,time)
+            values (#{state},#{add},#{user},#{pay},#{paynum},#{time})
+   </insert>
+
+    <insert id="insertcorderitem" parameterType="com.example.demo.entity.Orderitem">
+            insert into corderitem (shopid,choicesid,orderid,num)
+            values (#{shopid},#{choicesid},#{orderid},#{num})
+   </insert>
+    <delete id="deleteshopcart">
+        delete from cshopcart where
+        <foreach collection="list" item="item" separator=" or " index="index">
+            (user = #{item.user} )
+        </foreach>
+    </delete>
+    <delete id="deleteshopcartbyid">
+        delete from cshopcart where
+        <foreach collection="list" item="item" separator=" or " index="index">
+            (id = #{item.id} )
+        </foreach>
+    </delete>
+    <delete id="deleteordertbyid">
+        delete from corder where
+        <foreach collection="list" item="item" separator=" or " index="index">
+            (id = #{item.id} )
+        </foreach>
+    </delete>
+    <select id="selectorderitembyeid" resultType="com.example.demo.entity.Orderitem">
+    select * from corderitem where    orderid=#{eid}
+  </select>
+    <update id="updatecorder">
+        UPDATE corder SET  state=#{state} where id=#{id}
+    </update>
+    <select id="selectShopevaluatebyeid" resultType="com.example.demo.entity.Shopevaluate">
+    select * from cshopevaluate where    eid=#{eid}
+  </select>
+    <insert id="insertcshopevaluate" parameterType="com.example.demo.entity.Shopevaluate">
+            insert into cshopevaluate (eid,time,user,fraction,text)
+            values (#{eid},#{time},#{user},#{fraction},#{text})
+   </insert>
+    <select id="selectShopevaluate" resultType="com.example.demo.entity.Shopevaluate">
+    select * from cshopevaluate where    eid=#{eid} and user=#{user} and time=#{time}
+  </select>
+    <select id="selectshopBytype" resultType="com.example.demo.entity.Shop">
+    select * from cshop where    type=#{type}
+  </select>
+    <select id="selectshopBysearchname" resultType="com.example.demo.entity.Shop">
+    select * from cshop where    name like  '%${search}%'
+  </select>
+    <select id="selectshopBysearchtext" resultType="com.example.demo.entity.Shop">
+    select * from cshop where    text like  '%${search}%'
+  </select>
+
+
+    <!--    积分-->
+    <update id="updatecAccumulateByuse">
+        UPDATE caccumulate SET  cuse=#{cuse} where phone=#{phone}
+    </update>
+    <update id="updatecAccumulateBysum">
+        UPDATE caccumulate SET  csum=#{csum} where phone=#{phone}
+    </update>
+    <select id="selectAccumulate" resultType="com.example.demo.entity.Accumulate">
+    select * from caccumulate where    phone=#{phone}
+  </select>
+    <insert id="insertAccumulate" parameterType="com.example.demo.entity.Accumulate">
+            insert into caccumulate (csum,cuse,phone)  values (#{csum},#{cuse},#{phone})
+   </insert>
+    <select id="selectAccumulatebyuser" resultType="com.example.demo.entity.Accumulate">
+    select * from caccumulate where    phone=#{phone}
+  </select>
+
+
+
+
+    <select id="selectAccumulateitem" resultType="com.example.demo.entity.Accumulateitem">
+    select * from cAccumulateitem  where    phone=#{phone}
+  </select>
+
+    <insert id="insertAccumulateitem" parameterType="com.example.demo.entity.Accumulateitem">
+            insert into cAccumulateitem (type,eid,num,time,phone)  values (#{type},#{eid},#{num},#{time},#{phone})
+   </insert>
+</mapper>
+

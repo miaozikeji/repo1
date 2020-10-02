@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.FabulousDao">
+
+
+    <select id="selectFabulous" resultType="com.example.demo.entity.Fabulous">
+    select * from cFabulous where    type=#{type} and user =#{user} and eid=#{eid}
+  </select>
+
+    <insert id="insertFabulous" parameterType="com.example.demo.entity.Fabulous">
+        insert into cFabulous (type,user,eid)
+        values (#{type},#{user},#{eid})
+    </insert>
+    <delete id="delectFabulous">
+        delete from cFabulous where
+        <foreach collection="list" item="item" separator=" or " index="index">
+            (id = #{item.id} )
+        </foreach>
+    </delete>
+
+    <select id="selectFabulousByTypeEid" resultType="com.example.demo.entity.Fabulous">
+    select * from cFabulous where    type=#{type} and eid=#{eid}
+  </select>
+</mapper>
+

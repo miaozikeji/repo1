@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.EquipmentDao">
+
+
+    <select id="selectEquipment" resultType="com.example.demo.entity.Equipment">
+    select * from cEquipment where phone=#{phone}
+  </select>
+
+    <insert id="insertEquipment" parameterType="com.example.demo.entity.Equipment">
+            insert into cEquipment (name,phone,type) values (#{name},#{phone},#{type})
+        </insert>
+
+    <insert id="insertSports" parameterType="com.example.demo.entity.Sports">
+            insert into csports (eid,Y,M,D,num) values (#{eid},#{Y},#{M},#{D},#{num})
+        </insert>
+    <select id="selectSport" resultType="com.example.demo.entity.Sports">
+    select * from csports where eid=#{eid} and M=#{M}
+  </select>
+    <select id="selectEquipmentByid" resultType="com.example.demo.entity.Equipment">
+    select * from cEquipment where id=#{id}
+  </select>
+</mapper>
+

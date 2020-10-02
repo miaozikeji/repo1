@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapperDao.CollectionDao">
+
+
+    <select id="selectCollectionByuser" resultType="com.example.demo.entity.Collection">
+    select * from cCollection where    user=#{user}
+  </select>
+
+    <select id="slectCollection" resultType="com.example.demo.entity.Collection">
+    select * from cCollection where    type=#{type} and user =#{user} and eid=#{eid}
+  </select>
+    <insert id="insertCollection" parameterType="com.example.demo.entity.Collection">
+            insert into cCollection (type,eid,user)
+            values (#{type},#{eid},#{user})
+        </insert>
+    <delete id="delectCollection">
+        delete from cCollection where
+        <foreach collection="list" item="item" separator=" or " index="index">
+            (id = #{item.id} )
+        </foreach>
+    </delete>
+
+    <select id="selectCollectionByeid" resultType="com.example.demo.entity.Collection">
+    select * from cCollection where    eid=#{eid}
+  </select>
+
+    <select id="selectCollectionbytype" resultType="com.example.demo.entity.Collection">
+    select * from cCollection where    type=#{type} and user =#{user} order by id desc
+  </select>
+</mapper>
+
